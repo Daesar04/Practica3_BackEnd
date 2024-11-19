@@ -65,3 +65,56 @@ export const getDistanciaTotal = async (
 
     return new Response(`Distancia total: ${distanciaTotal} Km`, { status: 200 });
 };
+
+export const agregarNino = async (
+    ninosCollection: Collection<ninosModel>,
+    lugaresCollection: Collection<lugaresModel>,
+    nuevoNino: ninosModel
+): Promise<Response> => {
+    const lugarExistente = await lugaresCollection.findOne({ nombre: nuevoNino.ubicacion });
+    if(!lugarExistente)
+    {
+        return new Response("El lugar no existe.", { status: 404 });
+    }
+
+    if (nuevoNino.comportamiento !== "bueno" && nuevoNino.comportamiento !== "malo") 
+    {
+        return new Response("El comportamiento debe ser 'bueno' o 'malo'.", { status: 404 });
+    }
+
+    const ninoExistente = await ninosCollection.findOne({ nombre: nuevoNino.nombre });
+
+    if (ninoExistente) 
+    {
+        return new Response("El nombre del niño/a ya existe.", { status: 404 });
+    }
+
+    await ninosCollection.insertOne(nuevoNino);
+
+    if (nuevoNino.comportamiento === "bueno") {
+        await lugaresCollection.updateOne(
+            { nombre: nuevoNino.ubicacion },
+            { $push: { ninosBuenos: nuevoNino._id } }
+        );
+    }
+
+    return new Response("Niño/a agregado con éxito.", { status: 200 });
+};
+
+export const agregarLugar = async (
+    lugaresCollection: Collection<lugaresModel>,
+    nuevoLugar: lugaresModel
+): Promise<Response> => {
+    const lugarExistente = await lugaresCollection.findOne({ nombre: nuevoLugar.nombre });
+    if (lugarExistente) 
+    {
+        return new Response("El nombre del lugar ya existe.", { status: 404 });
+    }
+
+    if (!nuevoLugar.coordenadas || typeof nuevoLugar.coordenadas.latitud !== 'number' || typeof nuevoLugar.coordenadas.longitud !== 'number') {
+        return new Response("Las coordenadas no son válidas.", { status: 400 });
+    }
+
+    await lugaresCollection.insertOne(nuevoLugar);
+    return new Response("Lugar agregado con éxito.", { status: 200 });
+};

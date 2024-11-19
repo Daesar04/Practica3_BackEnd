@@ -32,12 +32,12 @@ export const convertirModeloLugarALugar = (
 ) => {
     return {
         nombre: modeloLugar.nombre,
-        coordenadas: parseCoordinates(modeloLugar.coordenadas),
+        coordenadas: sacarLatitudYLongitud(modeloLugar.coordenadas),
         ninosBuenos: modeloLugar.ninosBuenos
     };
 };
 
-export const parseCoordinates = (
+export const sacarLatitudYLongitud = (
     coords: string
 ): coordenadasLugar => {
     const [lat, lon] = coords.split(',').map(coord => parseFloat(coord.trim()));
