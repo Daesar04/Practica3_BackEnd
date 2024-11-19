@@ -1,5 +1,5 @@
-import { type Collection, MongoClient } from "mongodb";
-import { lugaresModel, ninosModel, coordenadasLugar } from "./types.ts";
+import { type Collection } from "mongodb";
+import { lugaresModel, ninosModel } from "./types.ts";
 import { convertirModeloLugarALugar, haversine, sacarLatitudYLongitud, sonCoordenadasReales } from "./utils.ts";
 
 export const buscarNinosComportamiento = async (

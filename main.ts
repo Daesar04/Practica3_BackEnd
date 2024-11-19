@@ -1,4 +1,4 @@
-import { Collection, MongoClient } from "mongodb";
+import { MongoClient } from "mongodb";
 import { lugaresModel, ninosModel } from "./types.ts";
 import { agregarLugar, agregarNino, buscarNinosComportamiento, getDistanciaTotal, getUbicacionesOrdenadas } from "./resolvers.ts";
 

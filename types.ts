@@ -1,20 +1,8 @@
 import { Double, ObjectId } from "mongodb";
 
-enum enumComportamiento {
-    bueno = 1,
-    malo = 0
-};
-
 export type coordenadasLugar = {
     latitud: Double, 
     longitud: Double
-};
-
-export type ninos = {
-    id: string,
-    nombre: string,
-    comportamiento: enumComportamiento,
-    ubicacion: string
 };
 
 export type ninosModel = {
@@ -22,13 +10,6 @@ export type ninosModel = {
     nombre: string,
     comportamiento: string,
     ubicacion: string
-};
-
-export type lugares = {
-    id: string,
-    nombre: string,
-    coordenadas: coordenadasLugar,
-    ninosBuenos: ninosModel[]
 };
 
 export type lugaresModel = {
