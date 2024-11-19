@@ -1,6 +1,6 @@
 import { Double } from "mongodb";
 
-const haversine = (
+export const haversine = (
     lat1: number, 
     lon1: number, 
     lat2: number, 
@@ -19,7 +19,7 @@ const haversine = (
     return R * c; // Distancia en km
 };
 
-const sonCoordenadasReales = (
+export const sonCoordenadasReales = (
     latitud: Double, 
     longitud: Double
 ): boolean => {
