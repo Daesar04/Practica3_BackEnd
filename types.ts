@@ -11,7 +11,7 @@ export type coordenadasLugar = {
 };
 
 export type ninos = {
-    _id: string,
+    id: string,
     nombre: string,
     comportamiento: enumComportamiento,
     ubicacion: string
@@ -25,7 +25,7 @@ export type ninosModel = {
 };
 
 export type lugares = {
-    _id: string,
+    id: string,
     nombre: string,
     coordenadas: coordenadasLugar,
     ninosBuenos: ninosModel[]

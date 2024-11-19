@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { lugaresModel, ninosModel } from "./types.ts";
-import { agregarNino, buscarNinosComportamiento, getDistanciaTotal, getUbicacionesOrdenadas } from "./resolvers.ts";
+import { agregarLugar, agregarNino, buscarNinosComportamiento, getDistanciaTotal, getUbicacionesOrdenadas } from "./resolvers.ts";
 
 const url = Deno.env.get("MONGO_URL");
 
@@ -50,10 +50,11 @@ const handler = async (
     {
       const body = await req.json();
 
-      if(!body.nombre || !body.coordenadas || !body.ninosBuenos)
+      if(body.nombre && body.coordenadas && !body.ninosBuenos)
       {
-        return new Response("Faltan datos", { status: 400 });
+        return await agregarLugar(lugaresCollection, body);
       }
+      return new Response("Faltan datos o hay fallos en ellos", { status: 400 });
     }
     else if(path === "/ninos")
     { 

@@ -1,6 +1,6 @@
 import { type Collection, MongoClient } from "mongodb";
 import { lugaresModel, ninosModel, coordenadasLugar } from "./types.ts";
-import { convertirModeloLugarALugar, haversine } from "./utils.ts";
+import { convertirModeloLugarALugar, haversine, sacarLatitudYLongitud, sonCoordenadasReales } from "./utils.ts";
 
 export const buscarNinosComportamiento = async (
     ninosCollection: Collection<ninosModel>,
@@ -111,10 +111,15 @@ export const agregarLugar = async (
         return new Response("El nombre del lugar ya existe.", { status: 404 });
     }
 
-    if (!nuevoLugar.coordenadas || typeof nuevoLugar.coordenadas.latitud !== 'number' || typeof nuevoLugar.coordenadas.longitud !== 'number') {
-        return new Response("Las coordenadas no son válidas.", { status: 400 });
-    }
+    const coordenadas = sacarLatitudYLongitud(nuevoLugar.coordenadas);
 
+    const coordenadasValidas = sonCoordenadasReales(coordenadas.latitud.valueOf(), coordenadas.longitud.valueOf());
+
+    if(!coordenadasValidas)
+    {
+        return new Response("Las coordenadas no son válidas.", { status: 404 });
+    }
+    nuevoLugar.ninosBuenos = [];
     await lugaresCollection.insertOne(nuevoLugar);
     return new Response("Lugar agregado con éxito.", { status: 200 });
 };
