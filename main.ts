@@ -10,13 +10,13 @@ if(!url) {
 }
 
 const client = new MongoClient(url);
-const dbName = 'nebrijadb';
+const dbName = 'Practica3';
 
 await client.connect();
 console.log('Connected successfully to server');
 const db = client.db(dbName);
-const nombreCollection = db.collection<>('');
-const nombreCollection = db.collection<>('');
+const ninosCollection = db.collection<ninosModel>('ninos');
+const lugaresCollection = db.collection<lugaresModel>('lugares');
 
 const handler = async (
   req: Request
