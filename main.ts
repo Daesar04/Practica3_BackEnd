@@ -29,11 +29,11 @@ const handler = async (
   {
     if(path === "/ninos/buenos")
     {
-      return await buscarNinosComportamiento(ninosCollection, "buenos");
+      return await buscarNinosComportamiento(ninosCollection, "bueno");
     }
     else if(path === "/ninos/malos")
     { 
-      return await buscarNinosComportamiento(ninosCollection, "malos");
+      return await buscarNinosComportamiento(ninosCollection, "malo");
     }
     else if(path === "/entregas")
     {

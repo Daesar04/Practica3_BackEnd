@@ -9,7 +9,7 @@ export const buscarNinosComportamiento = async (
 
     if(ninosBuenos.length === 0)
     {
-        return new Response(`No se han encontrado niños ${comportamiento}`, { status: 404 });
+        return new Response(`No se han encontrado niños ${comportamiento}s`, { status: 404 });
     }
     return new Response(JSON.stringify(ninosBuenos));
-};
+};  
