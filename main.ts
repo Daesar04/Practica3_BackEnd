@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { lugaresModel, ninosModel } from "./types.ts";
-import {  } from "./resolvers.ts";
+import { buscarNinosComportamiento } from "./resolvers.ts";
 
 const url = Deno.env.get("MONGO_URL");
 
@@ -29,17 +29,11 @@ const handler = async (
   {
     if(path === "/ninos/buenos")
     {
-      const ninosBuenos = await ninosCollection.find({ comportamiento: "bueno" }).toArray();
-
-      if(ninosBuenos.length === 0)
-      {
-        return new Response("No se han encontrado niños buenos", { status: 404 });
-      }
-      return new Response(JSON.stringify(ninosBuenos));
+      return await buscarNinosComportamiento(ninosCollection, "buenos");
     }
     else if(path === "/ninos/malos")
     { 
-      
+      return await buscarNinosComportamiento(ninosCollection, "malos");
     }
     else if(path === "/entregas")
     {
