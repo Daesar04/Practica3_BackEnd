@@ -1,3 +1,5 @@
+import { Double } from "mongodb";
+
 const haversine = (
     lat1: number, 
     lon1: number, 
@@ -16,3 +18,10 @@ const haversine = (
 
     return R * c; // Distancia en km
 };
+
+const sonCoordenadasReales = (
+    latitud: Double, 
+    longitud: Double
+): boolean => {
+    return latitud.valueOf() >= -90.0 && latitud.valueOf() <= 90.0 && longitud.valueOf() >= -180.0 && longitud.valueOf() <= 180.0;
+}

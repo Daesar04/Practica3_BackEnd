@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import {  } from "./types.ts";
+import { lugaresModel, ninosModel } from "./types.ts";
 import {  } from "./resolvers.ts";
 
 const url = Deno.env.get("MONGO_URL");

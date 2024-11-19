@@ -9,7 +9,7 @@ export type ninosModel = {
     _id: ObjectId,
     nombre: string,
     comportamiento: enumComportamiento,
-    ubicacion: boolean
+    ubicacion: string
 };
 
 export type lugaresModel = {
