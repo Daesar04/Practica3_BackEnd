@@ -1,13 +1,14 @@
 import { Double } from "mongodb";
+import { lugaresModel, coordenadasLugar } from "./types.ts";
 
 export const haversine = (
-    lat1: number, 
-    lon1: number, 
-    lat2: number, 
-    lon2: number
+    lat1: Double, 
+    lon1: Double, 
+    lat2: Double, 
+    lon2: Double
 ) => {
     const R = 6371; // Radio de la Tierra en km
-    const toRad = (deg: number) => (deg * Math.PI) / 180; // Conversión a radianes
+    const toRad = (deg: Double) => (deg * Math.PI) / 180.0; // Conversión a radianes
     const dLat = toRad(lat2 - lat1);
     const dLon = toRad(lon2 - lon1);
     const lat1Rad = toRad(lat1);
@@ -24,4 +25,24 @@ export const sonCoordenadasReales = (
     longitud: Double
 ): boolean => {
     return latitud.valueOf() >= -90.0 && latitud.valueOf() <= 90.0 && longitud.valueOf() >= -180.0 && longitud.valueOf() <= 180.0;
-}
+};
+
+export const convertirModeloLugarALugar = (
+    modeloLugar: lugaresModel
+) => {
+    return {
+        nombre: modeloLugar.nombre,
+        coordenadas: parseCoordinates(modeloLugar.coordenadas),
+        ninosBuenos: modeloLugar.ninosBuenos
+    };
+};
+
+export const parseCoordinates = (
+    coords: string
+): coordenadasLugar => {
+    const [lat, lon] = coords.split(',').map(coord => parseFloat(coord.trim()));
+    return {
+        latitud: new Double(lat),
+        longitud: new Double(lon),
+    };
+};

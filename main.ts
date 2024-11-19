@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { lugaresModel, ninosModel } from "./types.ts";
-import { buscarNinosComportamiento, getUbicacionesOrdenadas } from "./resolvers.ts";
+import { buscarNinosComportamiento, getDistanciaTotal, getUbicacionesOrdenadas } from "./resolvers.ts";
 
 const url = Deno.env.get("MONGO_URL");
 
@@ -41,7 +41,7 @@ const handler = async (
     }
     else if(path === "/ruta")
     {
-
+      return await getDistanciaTotal(lugaresCollection, ninosCollection);
     }
   } 
   else if(method === "POST")
