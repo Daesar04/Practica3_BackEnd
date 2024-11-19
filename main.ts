@@ -29,7 +29,13 @@ const handler = async (
   {
     if(path === "/ninos/buenos")
     {
-      
+      const ninosBuenos = await ninosCollection.find({ comportamiento: "bueno" }).toArray();
+
+      if(ninosBuenos.length === 0)
+      {
+        return new Response("No se han encontrado niños buenos", { status: 404 });
+      }
+      return new Response(JSON.stringify(ninosBuenos));
     }
     else if(path === "/ninos/malos")
     { 

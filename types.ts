@@ -5,16 +5,30 @@ enum enumComportamiento {
     malo = 0
 };
 
-export type ninosModel = {
-    _id: ObjectId,
+export type ninos = {
+    _id: string,
     nombre: string,
     comportamiento: enumComportamiento,
     ubicacion: string
 };
 
+export type ninosModel = {
+    _id: ObjectId,
+    nombre: string,
+    comportamiento: string,
+    ubicacion: string
+};
+
+export type lugares = {
+    _id: string,
+    nombre: string,
+    coordenadas: {latitud: number, longitud: number},
+    ninosBuenos: ninosModel[]
+};
+
 export type lugaresModel = {
     _id: ObjectId,
     nombre: string,
-    coordenadas: {latitud: number, longitud: number},
+    coordenadas: string,
     ninosBuenos: ObjectId[]
 };
