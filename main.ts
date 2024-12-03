@@ -2,7 +2,9 @@ import { MongoClient } from "mongodb";
 import { lugaresModel, ninosModel } from "./types.ts";
 import { agregarLugar, agregarNino, buscarNinosComportamiento, getDistanciaTotal, getUbicacionesOrdenadas } from "./resolvers.ts";
 
-const url = Deno.env.get("MONGO_URL");
+//const url = Deno.env.get("MONGO_URL");
+
+const url = "mongodb+srv://db_username:db_password@clustertsbackend.womww.mongodb.net/?retryWrites=true&w=majority&appName=ClusterTSBackEnd";
 
 if(!url) 
 {
