@@ -5,8 +5,7 @@ import { agregarLugar, agregarNino, buscarNinosComportamiento, getDistanciaTotal
 const url = Deno.env.get("MONGO_URL");
 
 if(!url) {
-  console.log("No se ha podido conectar a la URL");
-  Deno.exit(-1);
+  throw new Error("No se ha encontrado la URL de conexión a la base de datos");
 }
 
 const client = new MongoClient(url);
