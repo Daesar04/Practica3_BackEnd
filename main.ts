@@ -4,7 +4,8 @@ import { agregarLugar, agregarNino, buscarNinosComportamiento, getDistanciaTotal
 
 const url = Deno.env.get("MONGO_URL");
 
-if(!url) {
+if(!url) 
+{
   throw new Error("No se ha encontrado la URL de conexión a la base de datos");
 }
 
